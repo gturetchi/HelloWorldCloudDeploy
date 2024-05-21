@@ -1,9 +1,33 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: helloworld-deployment
+# spec:
+#   replicas: 3
+#   selector:
+#     matchLabels:
+#       app: helloworld
+#   template:
+#     metadata:
+#       labels:
+#         app: helloworld
+#     spec:
+#       containers:
+#       - name: helloworld
+#         image: helloworldregistry.azurecr.io/hello-world
+#         ports:
+#         - containerPort: 8080
+#           name: http
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: helloworld-deployment
+  annotations:
+    kubernetes.io/change-cause: "Updated image to version v3"
 spec:
   replicas: 3
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: helloworld
